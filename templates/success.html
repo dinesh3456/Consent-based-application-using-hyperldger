@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Success</title>
+    <style>
+      body {
+        background-color: #000;
+        overflow: hidden;
+      }
+
+      .paper {
+        position: absolute;
+        width: 30px;
+        height: 40px;
+        border-radius: 0 0 10px 10px;
+        opacity: 1;
+        animation: fly 2s ease-in-out forwards;
+      }
+
+      @keyframes fly {
+        0% {
+          transform: translate(0, 0);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(calc(50vw - 15px), calc(100vh - 40px));
+          opacity: 0;
+        }
+      }
+
+      h1 {
+        color: #fff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      function createPaper(x, y, color) {
+        var paper = document.createElement("div");
+        paper.style.left = x + "px";
+        paper.style.top = y + "px";
+        paper.style.backgroundColor = color;
+        paper.classList.add("paper");
+        document.body.appendChild(paper);
+      }
+
+      function blastPapers() {
+        var colors = [
+          "#f44336",
+          "#e91e63",
+          "#9c27b0",
+          "#673ab7",
+          "#3f51b5",
+          "#2196f3",
+          "#03a9f4",
+          "#00bcd4",
+          "#009688",
+          "#4caf50",
+          "#8bc34a",
+          "#cddc39",
+          "#ffeb3b",
+          "#ffc107",
+          "#ff9800",
+          "#ff5722",
+          "#795548",
+          "#607d8b",
+        ];
+        var x = Math.floor(Math.random() * window.innerWidth);
+        var y = Math.floor(Math.random() * window.innerHeight);
+        for (var i = 0; i < 30; i++) {
+          var color = colors[Math.floor(Math.random() * colors.length)];
+          createPaper(x, y, color);
+        }
+      }
+
+      setInterval(blastPapers, 100);
+    </script>
+    <h1>SUCCESSFULLY VERIFIED THE CREDENTIAL</h1>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Schema</title>
+    <style>
+      /* CSS styling for the form */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333333;
+      }
+
+      form {
+        margin: 0 auto;
+        max-width: 500px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333333;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #cccccc;
+        box-sizing: border-box;
+      }
+
+      button[type="submit"] {
+        background-color: #333333;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #555555;
+      }
+
+      p {
+        text-align: center;
+        color: #333333;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SUCCESSFULLY CREATED CONNECTION WITH THE ISSUER</h1>
+    <h1>Create Schema</h1>
+    <form method="post" action="/create_schema">
+      <label for="num_attributes">Number of Attributes:</label>
+      <input type="number" id="num_attributes" name="num_attributes" required />
+
+      <div id="attribute_fields"></div>
+
+      <label for="schema_name">Schema Name:</label>
+      <input type="text" id="schema_name" name="schema_name" required />
+
+      <label for="schema_version">Schema Version:</label>
+      <input type="text" id="schema_version" name="schema_version" required />
+
+      <button type="submit">Create Schema</button>
+    </form>
+
+    <script>
+      // JavaScript code to dynamically add attribute fields based on user input
+      const attributeFieldsDiv = document.querySelector("#attribute_fields");
+      const numAttributesInput = document.querySelector("#num_attributes");
+
+      numAttributesInput.addEventListener("input", () => {
+        const numAttributes = parseInt(numAttributesInput.value);
+        attributeFieldsDiv.innerHTML = "";
+
+        for (let i = 0; i < numAttributes; i++) {
+          const label = document.createElement("label");
+          label.textContent = `Attribute ${i + 1}:`;
+
+          const input = document.createElement("input");
+          input.type = "text";
+          input.name = `attribute_${i + 1}`;
+
+          const div = document.createElement("div");
+          div.appendChild(label);
+          div.appendChild(input);
+
+          attributeFieldsDiv.appendChild(div);
+        }
+      });
+    </script>
+
+    {% if message %}
+    <p>{{ message }}</p>
+
+    {% endif %}
+  </body>
+</html>
